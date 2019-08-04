@@ -1,0 +1,70 @@
+{% load staticfiles%}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>LoginBuZ</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<!-- MATERIAL DESIGN ICONIC FONT -->
+		<link href="{% static "fonts/material-design-iconic-font/css/material-design-iconic-font.css" %}" rel="stylesheet" >
+
+		<!-- STYLE CSS -->
+		<link rel="stylesheet" href="{%static "css/style.css" %}">
+	</head>
+
+	<body>
+
+		<div class="wrapper" style="background-image: url({% static 'img/fondo.jpg'%})">
+			<div class="inner">
+				<div class="image-holder">
+					<img src="{% static "img/logo.png" %}" alt="">
+				</div>
+
+				<form action="/buz/autenticar/" method="POST">
+
+                    {% csrf_token %}
+					<h3>Login</h3>
+
+
+					<div class="form-wrapper">
+						<input type="text" placeholder="Cédula" class="form-control" name="cedula">
+						<i class="zmdi zmdi-email"></i>
+					</div>
+
+
+					<div class="form-wrapper">
+						<input type="password" placeholder="Contraseña" class="form-control" name="contrasena">
+						<i class="zmdi zmdi-lock"></i>
+					</div>
+                    {% if messages %}
+                    <ul>
+	                    {% for message in messages %}
+	                        <li>{{ message }}</li>
+	                    {% endfor %}
+                    </ul>
+                    {% endif %}
+					<button id="usu">Entrar
+						<i class="zmdi zmdi-arrow-right"></i>
+					</button>
+				</form>
+			</div>
+		</div>
+
+	</body>
+
+<script>
+    window.onload = function(){
+
+        var butt=document.getElementById("usu");
+        butt.onclick= function (){
+
+            var name= document.getElementById("name").value;
+            console.log(name);
+            document.cookie="username = "+ name + "; path=/ ";
+        }
+
+    }
+
+</script>
+</html>
